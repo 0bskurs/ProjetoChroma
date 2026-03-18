@@ -61,10 +61,10 @@ public class PlayerLocomotion : MonoBehaviour
             inputDirection.Normalize();
 
         Vector3 targetVelocity = inputDirection * maxSpeed;
-
+        Debug.Log($"Input Magnitude:{inputMagnitude}");
         if (inputMagnitude > 0.01f)
         {
-            if (currentVelocity.sqrMagnitude < 0.01f)
+            if (currentVelocity.sqrMagnitude < -2f)
             {
                 // Set starting speed in input direction
                 currentVelocity = inputDirection * startingSpeed;
@@ -72,12 +72,12 @@ public class PlayerLocomotion : MonoBehaviour
             else
             {
                 float alignment = Vector3.Dot(currentVelocity.normalized, targetVelocity.normalized);
-
-                if (alignment < 0f)
+                Debug.Log($"Current alignemt: {alignment}");
+                if (alignment < -10f)
                 {
                     currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 0.5f);
                 }
-                else if (alignment < 0.5f)
+                else if (alignment < 1f)
                 {
                     Vector3 velocityAlongOldDir = Vector3.Project(currentVelocity, targetVelocity.normalized);
                     Vector3 lateralVelocity = currentVelocity - velocityAlongOldDir;

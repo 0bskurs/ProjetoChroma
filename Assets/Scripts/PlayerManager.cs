@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    Animator animator;
     InputManager inputManager;
     CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
@@ -11,6 +12,7 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         cameraManager = FindFirstObjectByType<CameraManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        animator = GetComponent<Animator>();
     }   
 
 
@@ -31,6 +33,8 @@ public class PlayerManager : MonoBehaviour
     {
 
         cameraManager.HandleAllCameraMovement();
+
+        playerLocomotion.isJumping = animator.GetBool("isJumping");
 
     }
 }
